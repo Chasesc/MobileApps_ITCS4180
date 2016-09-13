@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">InClass2a</string>
+
+    <string name="length1Label">Length 1:</string>
+    <string name="length2Label">Length 2:</string>
+    <string name="areaLabel">Area:</string>
+
+    <string name="defaultLength">Enter Length</string>
+
+    <string name="triangleButton">Area of Triangle</string>
+    <string name="squareButton">Area of Square</string>
+    <string name="circleButton">Area of Circle</string>
+    <string name="rectangleButton">Area of Rectangle</string>
+    <string name="clearButton">Clear All</string>
+
+    <string name="errorEmpty1">You did not enter anything for length one!</string>
+    <string name="errorEmpty2">You did not enter anything for length two!</string>
+</resources>

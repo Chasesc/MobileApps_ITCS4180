@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Expense App</string>
+    <string name="label_add_expense">Add Expense</string>
+    <string name="label_edit_expense">Edit Expense</string>
+    <string name="label_delete_expense">Delete Expense</string>
+    <string name="label_show_expense">Show Expenses</string>
+    <string name="label_finish">Finish</string>
+
+    <string name="category_groceries">Groceries</string>
+    <string name="category_invoice">Invoice</string>
+    <string name="category_transportation">Transportation</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_rent">Rent</string>
+    <string name="category_trips">Trips</string>
+    <string name="category_utilities">Utilities</string>
+    <string name="category_other">Other</string>
+
+    <string name="app_name_add">Add Expense</string>
+    <string name="label_expense_add"><b>Add An Expense</b></string>
+    <string name="label_expense_name">Expense Name</string>
+    <string name="label_expense_category">Category</string>
+    <string name="label_expense_amount">Amount</string>
+    <string name="label_expense_date">Date</string>
+    <string name="label_expense_receipt">Receipt</string>
+
+    <string name="label_select_date">Select a date</string>
+    <string name="label_select_image">Select an Image</string>
+
+    <string name="label_name_error">Enter the name of the expense here</string>
+    <string name="label_amount_error">Enter the amount of the expense here</string>
+    <string name="label_date_error">"Enter the date of the expense by tapping the calendar icon"</string>
+
+
+    <string-array name="array_categories">
+        <item>@string/category_groceries</item>
+        <item>@string/category_invoice</item>
+        <item>@string/category_transportation</item>
+        <item>@string/category_shopping</item>
+        <item>@string/category_rent</item>
+        <item>@string/category_trips</item>
+        <item>@string/category_utilities</item>
+        <item>@string/category_other</item>
+    </string-array>
+</resources>

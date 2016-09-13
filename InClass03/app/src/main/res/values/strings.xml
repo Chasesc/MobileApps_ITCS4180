@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Main Activity</string>
+    <string name="label_name">Name</string>
+    <string name="label_email">Email</string>
+    <string name="label_department">Department</string>
+    <string name="label_SIS">SIS</string>
+    <string name="label_CS">CS</string>
+    <string name="label_BIO">BIO</string>
+    <string name="label_others">Others</string>
+    <string name="label_mood">Your current mood:</string>
+    <string name="label_submit">Submit</string>
+
+    <string name="display_app_name">Display Activity</string>
+    <string name="label_display_info"><b>Student Information</b></string>
+    <string name="label_mood_short">Mood</string>
+
+    <string name="label_edit"><b>Edit Information</b></string>
+    <string name="edit_app_name">Edit Activity</string>
+</resources>
