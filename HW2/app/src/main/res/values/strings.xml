@@ -41,4 +41,22 @@
         <item>@string/category_utilities</item>
         <item>@string/category_other</item>
     </string-array>
+
+    <string name="app_name_edit">Edit Expense</string>
+    <string name="label_select_expense">Select Expense</string>
+    <string name="label_button_save">Save</string>
+    <string name="label_button_cancel">Cancel</string>
+    <string name="label_alert">Pick an Expense</string>
+
+    <string name="app_name_delete">Delete Expense</string>
+    <string name="label_button_delete">Delete</string>
+
+    <string name="app_name_show">Show Expenses</string>
+    <string name="label_expense_details"><b>Expense Details</b></string>
+    <string name="label_name">Name</string>
+    <string name="label_category">Category</string>
+    <string name="label_amount">Amount</string>
+    <string name="label_date">Date</string>
+    <string name="label_receipt"><b>Receipt</b></string>
+    <string name="label_button_finish">Finish</string>
 </resources>

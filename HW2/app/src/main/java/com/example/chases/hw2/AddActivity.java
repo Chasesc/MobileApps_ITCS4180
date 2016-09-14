@@ -83,8 +83,6 @@ public class AddActivity extends AppCompatActivity
             public void onClick(View v) {
                 anyError = false;
 
-                Log.d("asdf", "TEST!");
-
                 String name = getName();
                 double amount = getAmount();
                 String category = spinnerCategory.getSelectedItem().toString();
@@ -94,10 +92,8 @@ public class AddActivity extends AppCompatActivity
                 if(anyError)
                     return;
 
-                Expense expense = new Expense(name, category, amount, date, imgUri.toString());
-
-
-                Log.d("asdfasdf", expense.toString());
+                Expense expense = new Expense(name, category, amount, date,
+                        imgUri != null ? imgUri.toString() : null);
 
                 Intent intent = new Intent();
                 intent.putExtra(MainActivity.EXPENSE_KEY, expense);

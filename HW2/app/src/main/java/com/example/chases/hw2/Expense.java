@@ -22,6 +22,58 @@ public class Expense implements Serializable
         this.image = image;
     }
 
+    public String getCategory()
+    {
+        return category;
+    }
+
+    public double getAmount()
+    {
+        return amount;
+    }
+
+    public Date getDate()
+    {
+        return date;
+    }
+
+    public String getImage()
+    {
+        return image;
+    }
+
+    public String getName()
+    {
+        return name;
+
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setCategory(String category)
+    {
+        this.category = category;
+    }
+
+    public void setAmount(double amount)
+    {
+        this.amount = amount;
+    }
+
+    public void setDate(Date date)
+    {
+        this.date = date;
+    }
+
+    public void setImage(String image)
+    {
+        this.image = image;
+    }
+
+
     @Override
     public String toString() {
         return "Expense{" +
