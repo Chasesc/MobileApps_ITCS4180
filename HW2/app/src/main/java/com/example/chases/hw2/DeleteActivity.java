@@ -159,14 +159,6 @@ public class DeleteActivity extends AppCompatActivity
 
     private CharSequence[] getCharArray(ArrayList<Expense> expenses)
     {
-        //The array needs to be sorted in alphabetical order.
-        Collections.sort(expenses, new Comparator<Expense>() {
-            @Override
-            public int compare(Expense lhs, Expense rhs) {
-                return lhs.getName().compareTo(rhs.getName());
-            }
-        });
-
         CharSequence[] charArray = new CharSequence[expenses.size()];
         for(int i = 0; i < expenses.size(); i++)
         {

@@ -59,4 +59,6 @@
     <string name="label_date">Date</string>
     <string name="label_receipt"><b>Receipt</b></string>
     <string name="label_button_finish">Finish</string>
+
+    <string name="label_show_and_empty">You do not have any expenses!</string>
 </resources>

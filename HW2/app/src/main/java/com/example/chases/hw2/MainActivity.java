@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +62,19 @@ public class MainActivity extends AppCompatActivity
         buttonShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(MainActivity.this, )
+
+                if(!expenses.isEmpty())
+                {
+                    Intent intent = new Intent(MainActivity.this, ShowActivity.class);
+                    intent.putExtra(EXPENSE_KEY, expenses);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(MainActivity.this, getString(R.string.label_show_and_empty),
+                            Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -86,8 +99,6 @@ public class MainActivity extends AppCompatActivity
 
                 if(expense != null)
                     expenses.add(expense);
-
-                Log.d("asdfasdf", expense.toString() + "\n" + expenses.size());
             }
         }
         else if(requestCode == EDIT_REQ_CODE)
@@ -110,12 +121,8 @@ public class MainActivity extends AppCompatActivity
 
                 Integer index = bundle.getInt(INTEGER_KEY);
 
-                Log.d("asdf", "intttttt main: " + index + " " + expenses.size());
-
                 //Cast to int so we call remove(int) instead of remove(Object)
                 expenses.remove((int)index);
-
-                Log.d("asdf", "intttttt mainsza: " + expenses.size());
             }
         }
     }

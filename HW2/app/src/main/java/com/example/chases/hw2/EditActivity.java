@@ -43,12 +43,13 @@ public class EditActivity extends AppCompatActivity
     private Integer index;
     int dateMonth, dateDay, dateYear;
     private Uri imgUri;
+    private String imgString;
 
     private boolean anyError;
     private boolean dateChanged = false;
     private ArrayList<Expense> expenses;
 
-    private static final int PERMISSION_REQUEST_MANAGE_DOCUMENTS = 100;
+    private static final int PERMISSION_REQUEST_MANAGE_DOCUMENTS = 1;
 
 
     @Override
@@ -216,7 +217,12 @@ public class EditActivity extends AppCompatActivity
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    Log.d("asdf", "GRANTED!!!!!!");
+                    Log.d("editactivity", "GRANTED!!!!!!");
+                    if(imgString != null)
+                    {
+                        Log.d("editactivity", imgString);
+                        imageReceipt.setImageURI(Uri.parse(imgString));
+                    }
 
                 } else {
 
@@ -241,34 +247,28 @@ public class EditActivity extends AppCompatActivity
                          cal.get(Calendar.YEAR));
 
         setSpinnerCategory(expense.getCategory());
+        
+        int permessionCheck = ContextCompat.checkSelfPermission(EditActivity.this,
+                android.Manifest.permission.MANAGE_DOCUMENTS);
 
-        if(expense.getImage() != null)
+        if(permessionCheck != PackageManager.PERMISSION_GRANTED)
         {
-            Log.d("asdf", "image not null");
-            imageReceipt.setImageURI(Uri.parse(expense.getImage()));
+            Log.d("asdf", "no per: " + permessionCheck);
+
+            if(ActivityCompat.shouldShowRequestPermissionRationale(EditActivity.this,
+                    android.Manifest.permission.MANAGE_DOCUMENTS))
+            {
+
+            }
+            else
+            {
+                ActivityCompat.requestPermissions(EditActivity.this,
+                        new String[] {android.Manifest.permission.MANAGE_DOCUMENTS},
+                        PERMISSION_REQUEST_MANAGE_DOCUMENTS);
+            }
         }
 
-
-        /*
-
-        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.MANAGE_DOCUMENTS)
-                != PackageManager.PERMISSION_GRANTED)
-        {
-            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.MANAGE_DOCUMENTS},
-                    PERMISSION_REQUEST_MANAGE_DOCUMENTS);
-
-            Log.d("asdf", "YEAHHHBABY");
-        }
-        else
-        {
-            Log.d("asdf", "NOPEEEE");
-        }
-
-        Uri uri = null;
-        if(expense.getImage() != null)
-            uri = Uri.parse(expense.getImage());
-
-        setImageReceipt(uri);*/
+        imgString = expense.getImage();
 
     }
 
@@ -303,14 +303,6 @@ public class EditActivity extends AppCompatActivity
 
     private CharSequence[] getCharArray(ArrayList<Expense> expenses)
     {
-        //The array needs to be sorted in alphabetical order.
-        Collections.sort(expenses, new Comparator<Expense>() {
-            @Override
-            public int compare(Expense lhs, Expense rhs) {
-                return lhs.getName().compareTo(rhs.getName());
-            }
-        });
-
         CharSequence[] charArray = new CharSequence[expenses.size()];
         for(int i = 0; i < expenses.size(); i++)
         {
