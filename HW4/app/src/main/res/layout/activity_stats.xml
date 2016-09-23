@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_stats"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,10 +9,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.philliphunter.hw4.MainActivity">
+    tools:context="com.philliphunter.hw4.StatsActivity">
 
     <TextView
-        android:text="@string/label_main_heading"
+        android:text="@string/label_stats_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -25,14 +24,14 @@
         android:textSize="24sp"/>
 
     <Button
-        android:text="@string/button_exit"
+        android:text="@string/button_quit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textAllCaps="false"
-        android:id="@+id/btnExit"/>
+        android:id="@+id/btnQuit"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -40,41 +39,44 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/btnStartTrivia"
-        android:text="@string/button_start_trivia"
+        android:text="@string/button_try_again"
         android:textAllCaps="false"
-        android:enabled="false"/>
+        android:id="@+id/btnTryAgain"/>
 
-    <ImageView
+    <TextView
+        android:text="#CC%"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/trivia"
-        android:layout_marginTop="16dp"
         android:layout_below="@+id/lblStatsHeading"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/imageTrivia"
-        android:visibility="invisible"/>
+        android:layout_marginTop="31dp"
+        android:id="@+id/lblCorrectPercent"
+        android:textSize="24sp"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progPercentCorrect"
+        android:layout_alignTop="@+id/lblCorrectPercent"
+        android:layout_toRightOf="@+id/lblCorrectPercent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:max="100"/>
 
     <TextView
-        android:text="@string/label_loading_trivia"
-        android:layout_width="wrap_content"
+        android:text="@string/label_not_all_correct"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lblTriviaLoadStatus"
-        android:layout_below="@+id/imageTrivia"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"/>
+        android:layout_below="@+id/lblCorrectPercent"
+        android:layout_marginTop="30dp"
+        android:id="@+id/lblStatsMessage"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_horizontal"/>
 
-    <Button
-        android:text="@string/button_retry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/lblTriviaLoadStatus"
-        android:layout_alignLeft="@+id/lblTriviaLoadStatus"
-        android:layout_alignStart="@+id/lblTriviaLoadStatus"
-        android:layout_marginTop="5dp"
-        android:id="@+id/btnRetry"
-        android:textAllCaps="false"
-        android:visibility="invisible"/>
 
 </RelativeLayout>

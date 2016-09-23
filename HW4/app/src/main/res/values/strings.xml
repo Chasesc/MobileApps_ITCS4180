@@ -2,9 +2,12 @@
     <string name="app_name">Trivia App</string>
     <string name="label_main_heading">Welcome to Trivia App</string>
     <string name="label_loading_trivia">Loading Trivia</string>
+    <string name="label_connection_error">Connection error!</string>
     <string name="label_trivia_ready">Trivia Ready</string>
+    <string name="button_retry">Retry</string>
     <string name="button_exit">Exit</string>
     <string name="button_start_trivia">Start Trivia</string>
+    <string name="button_try_again">Try Again</string>
     <string name="label_time_left">Time Left:</string>
     <string name="label_seconds">Seconds</string>
     <string name="button_quit">Quit</string>

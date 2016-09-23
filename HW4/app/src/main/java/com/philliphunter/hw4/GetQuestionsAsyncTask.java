@@ -1,9 +1,12 @@
+/*
+    Assignment:   Homework 4
+    File:         GetQuestionsAsyncTask.java
+    Participants: Phillip Hunter, Chase Schelthoff
+ */
+
 package com.philliphunter.hw4;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,17 +15,15 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Question>>
+class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Question>>
 {
-    IData activity;
+    private IData activity;
 
-    public GetQuestionsAsyncTask(IData activity)
+    GetQuestionsAsyncTask(IData activity)
     {
         this.activity = activity;
     }
@@ -37,6 +38,8 @@ public class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Que
     @Override
     protected ArrayList<Question> doInBackground(String... params)
     {
+        BufferedReader _BufferedReader = null;
+
         try
         {
             URL url = new URL(params[0]);
@@ -48,7 +51,7 @@ public class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Que
 
             if(statusCode == HttpURLConnection.HTTP_OK)
             {
-                BufferedReader _BufferedReader = new BufferedReader(new InputStreamReader(_HttpURLConnection.getInputStream()));
+                _BufferedReader = new BufferedReader(new InputStreamReader(_HttpURLConnection.getInputStream()));
                 StringBuilder _StringBuilder = new StringBuilder();
                 String currLine = _BufferedReader.readLine();
 
@@ -61,21 +64,28 @@ public class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Que
                 return parseQuestions(_StringBuilder.toString());
             }
         }
-        catch (MalformedURLException e)
+        catch (IOException | JSONException e)
         {
             e.printStackTrace();
         }
-        catch (IOException e)
+        finally
         {
-            e.printStackTrace();
-        } catch (JSONException e)
-        {
-            e.printStackTrace();
+            if(_BufferedReader != null)
+            {
+                try
+                {
+                    _BufferedReader.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
         }
         return  null;
     }
 
-    public static ArrayList<Question> parseQuestions(String jsonString) throws JSONException
+    private static ArrayList<Question> parseQuestions(String jsonString) throws JSONException
     {
         ArrayList<Question> result = new ArrayList<Question>();
 
@@ -87,6 +97,8 @@ public class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Que
             JSONObject currQuestionJSON = questionsJson.getJSONObject(i);
             Question currQuestion = new Question();
 
+            currQuestion.setId(currQuestionJSON.getInt("id"));
+
             currQuestion.setText(currQuestionJSON.getString("text"));
             currQuestion.setAnswer(currQuestionJSON.getJSONObject("choices").getInt("answer") - 1);
 
@@ -94,7 +106,6 @@ public class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Que
             {
                 currQuestion.setImage(currQuestionJSON.getString("image"));
             }
-
 
             JSONArray currQuestionChoicesJSON = currQuestionJSON.getJSONObject("choices").getJSONArray("choice");
             String[] currQuestionChoices = new String[currQuestionChoicesJSON.length()];
@@ -118,17 +129,12 @@ public class GetQuestionsAsyncTask extends AsyncTask<String, Void, ArrayList<Que
         super.onPostExecute(questions);
         activity.setTriviaReady(true);
 
-        if(questions != null)
-        {
-            Log.d("hw4", questions.toString());
-        }
-
         activity.setQuestions(questions);
     }
 
-    public static interface IData
+    interface IData
     {
-        public void setTriviaReady(boolean ready);
-        public void setQuestions(ArrayList<Question> questions);
+        void setTriviaReady(boolean ready);
+        void setQuestions(ArrayList<Question> questions);
     }
 }

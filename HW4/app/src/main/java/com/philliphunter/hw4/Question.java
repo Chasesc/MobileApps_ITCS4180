@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class Question implements Serializable
 {
+    private int id;
     private String text;
     private String image;
     private String[] choices;
@@ -12,12 +13,18 @@ public class Question implements Serializable
 
     public Question() {}
 
-    public Question(String text, String image, String[] choices, int answer)
+    public Question(int id, String text, String image, String[] choices, int answer)
     {
+        this.id = id;
         this.text = text;
         this.image = image;
         this.choices = choices;
         this.answer = answer;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 
     public String getText()
@@ -38,6 +45,11 @@ public class Question implements Serializable
     public int getAnswer()
     {
         return answer;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public void setText(String text)
@@ -64,10 +76,11 @@ public class Question implements Serializable
     public String toString()
     {
         return "Question{" +
-                "text='" + text + '\'' +
-                ", image='" + image + '\'' +
+                "answer=" + answer +
                 ", choices=" + Arrays.toString(choices) +
-                ", answer=" + answer +
+                ", image='" + image + '\'' +
+                ", text='" + text + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

@@ -1,8 +1,16 @@
+/*
+    Assignment:   Homework 4
+    File:         MainActivity.java
+    Participants: Phillip Hunter, Chase Schelthoff
+ */
+
 package com.philliphunter.hw4;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +22,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements GetQuestionsAsyncTask.IData
 {
+    public static final String TAG = "HW4";
+
+    public static final String QUESTIONS_KEY = "QUESTIONS";
     private final String TRIVIA_URL = "http://dev.theappsdr.com/apis/trivia_json/index.php";
+
     private ArrayList<Question> questions = new ArrayList<Question>();
 
     ProgressDialog _ProgressDialog;
@@ -23,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements GetQuestionsAsync
     private TextView lblTriviaLoadStatus;
     private Button btnStartTrivia;
     private Button btnExit;
+    private Button btnRetry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements GetQuestionsAsync
         setupViews();
         setupListeners();
 
-        new GetQuestionsAsyncTask(this).execute(TRIVIA_URL);
+        attemptConnection();
     }
 
     private void setupViews()
@@ -42,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements GetQuestionsAsync
         lblTriviaLoadStatus = (TextView)findViewById(R.id.lblTriviaLoadStatus);
         btnStartTrivia = (Button)findViewById(R.id.btnStartTrivia);
         btnExit = (Button)findViewById(R.id.btnExit);
+        btnRetry = (Button)findViewById(R.id.btnRetry);
     }
 
     private void setupListeners()
@@ -54,6 +68,49 @@ public class MainActivity extends AppCompatActivity implements GetQuestionsAsync
                 finish();
             }
         });
+
+        btnStartTrivia.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent triviaIntent = new Intent(MainActivity.this, TriviaActivity.class);
+                triviaIntent.putExtra(QUESTIONS_KEY, questions);
+
+                startActivity(triviaIntent);
+            }
+        });
+
+        btnRetry.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                attemptConnection();
+            }
+        });
+    }
+
+    private void attemptConnection()
+    {
+        if(isConnectedOnline())
+        {
+            btnRetry.setVisibility(View.INVISIBLE);
+            new GetQuestionsAsyncTask(this).execute(TRIVIA_URL);
+        }
+        else
+        {
+            lblTriviaLoadStatus.setText(getString(R.string.label_connection_error));
+            btnRetry.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private boolean isConnectedOnline()
+    {
+        ConnectivityManager _ConnectivityManager = ((ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
+        NetworkInfo _NetworkInfo = _ConnectivityManager.getActiveNetworkInfo();
+
+        return (_NetworkInfo != null) && (_NetworkInfo.isConnected());
     }
 
     @Override
@@ -82,5 +139,22 @@ public class MainActivity extends AppCompatActivity implements GetQuestionsAsync
     public void setQuestions(ArrayList<Question> questions)
     {
         this.questions = questions;
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        try
+        {
+            if (_ProgressDialog != null && _ProgressDialog.isShowing())
+            {
+                _ProgressDialog.dismiss();
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        super.onDestroy();
     }
 }
