@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">iTunes Top Podcasts</string>
+    <string name="lbl_search">Search...</string>
+    <string name="lbl_loading">Loading News ...</string>
+    <string name="lbl_go">Go</string>
+    <string name="lbl_clear">Clear</string>
+    <string name="lbl_title">Title</string>
+    <string name="lbl_date">Updated on: </string>
+    <string name="lbl_summary">Summary</string>
+
+</resources>
