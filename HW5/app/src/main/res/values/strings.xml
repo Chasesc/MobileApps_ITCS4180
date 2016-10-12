@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Weather App</string>
+    <string name="lbl_city_hint">City (i.e. Charlotte)</string>
+    <string name="lbl_state_hint">State (i.e. NC)</string>
+    <string name="lbl_submit">Submit</string>
+    <string name="lbl_no_favorites">There is no city in your favorites.</string>
+    <string name="lbl_favorites">Favorites</string>
+    <string name="lbl_city_deleted">City Deleted</string>
+
+    <string name="app_name_city_weather">City Weather</string>
+    <string name="lbl_hourly_data">Hourly Data</string>
+    <string name="lbl_current_location">Current Location</string>
+    <string name="lbl_loading">Loading Hourly Data</string>
+    <string name="title_activity_tacobell">tacobell</string>
+
+    <string name="lbl_fahrenheit">Fahrenheit</string>
+    <string name="lbl_max_temp">Max Temperature:</string>
+    <string name="lbl_min_temp">Min Temperature:</string>
+    <string name="lbl_feels_like">Feels Like:</string>
+    <string name="lbl_humidity">Humidity:</string>
+    <string name="lbl_dewpoint">Dewpoint:</string>
+    <string name="lbl_pressure">Pressure:</string>
+    <string name="lbl_clouds">Clouds:</string>
+    <string name="lbl_winds">Winds:</string>
+</resources>
