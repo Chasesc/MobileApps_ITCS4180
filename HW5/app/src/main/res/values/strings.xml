@@ -3,7 +3,7 @@
     <string name="lbl_city_hint">City (i.e. Charlotte)</string>
     <string name="lbl_state_hint">State (i.e. NC)</string>
     <string name="lbl_submit">Submit</string>
-    <string name="lbl_no_favorites">There is no city in your favorites.</string>
+    <string name="lbl_no_favorites">There is no city in your Favorites.</string>
     <string name="lbl_favorites">Favorites</string>
     <string name="lbl_city_deleted">City Deleted</string>
 
@@ -22,4 +22,5 @@
     <string name="lbl_pressure">Pressure:</string>
     <string name="lbl_clouds">Clouds:</string>
     <string name="lbl_winds">Winds:</string>
+    <string name="btn_add_to_favorites">Add to Favorites</string>
 </resources>

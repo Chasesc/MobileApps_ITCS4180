@@ -5,14 +5,19 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 public class CityWeatherActivity extends AppCompatActivity implements GetJSONData.IJSONActivity
 {
@@ -24,6 +29,7 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
     private ProgressDialog progressLoading;
     private TextView textViewLocation;
     private ListView listViewWeather;
+    private Button btnAddToFavorites;
 
     private String cityName, stateInitials;
     private int minTemp, maxTemp;
@@ -36,7 +42,7 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_weather);
 
-        setAllVies();
+        setAllViews();
 
         Intent intent = getIntent();
 
@@ -51,16 +57,17 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         textViewLocation.setText(getString(R.string.lbl_current_location) + ": " + cityName + ", " + stateInitials);
         progressLoading.show();
 
-        new GetJSONData(this).execute("http://api.wunderground.com/api/214634720744cde6/hourly/q/NC/Charlotte.json");
+        //new GetJSONData(this).execute("http://api.wunderground.com/api/" + API_KEY + "/hourly/q/NC/Charlotte.json"); //TODO: Unlock this from charlotte
+        new GetJSONData(this).execute(getJSONURI());
     }
 
     private String getJSONURI()
     {
         return "http://api.wunderground.com/api/" + API_KEY + "/hourly/q/" + stateInitials
-                + "/" + cityName + ".json";
+                + "/" + cityName.replace(' ', '_') + ".json";
     }
 
-    private void setAllVies()
+    private void setAllViews()
     {
         progressLoading = new ProgressDialog(this);
         progressLoading.setTitle(getString(R.string.lbl_loading));
@@ -68,6 +75,38 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
 
         textViewLocation = (TextView) findViewById(R.id.textViewLocation);
         listViewWeather  = (ListView) findViewById(R.id.listViewWeather);
+
+        btnAddToFavorites = (Button) findViewById(R.id.btnAddToFavorites);
+
+        //TODO: How to make in the menu like the PDF specifies?
+        btnAddToFavorites.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                HashMap<String, FavoriteData> currFavorites = MainActivity.getFavorites();
+
+                if(currFavorites == null)
+                {
+                    currFavorites = new HashMap<String, FavoriteData>();
+                }
+
+                String key = cityName.toLowerCase() + "_" + stateInitials.toLowerCase();
+
+                if(currFavorites.containsKey(key))
+                {
+                    Toast.makeText(CityWeatherActivity.this, "Updated Favorites Record", Toast.LENGTH_LONG).show(); // TODO: Make string res
+                }
+                else
+                {
+                    Toast.makeText(CityWeatherActivity.this, "Added to Favorites", Toast.LENGTH_LONG).show(); // TODO: Make string res
+                }
+
+                currFavorites.put(key, new FavoriteData(cityName, stateInitials, Calendar.getInstance().getTime(), weather.get(0).getTemperature()));
+
+                MainActivity.saveFavorites(currFavorites);
+            }
+        });
     }
 
     @Override

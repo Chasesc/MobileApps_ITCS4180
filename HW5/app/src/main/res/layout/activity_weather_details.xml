@@ -63,14 +63,14 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/textView16"
-            android:layout_weight="0.5"/>
+            android:layout_weight=".5"/>
 
         <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMax"
-            android:layout_weight="0.5"
+            android:layout_weight=".5"
             android:textStyle="normal|bold"
             android:textAlignment="textEnd"/>
     </LinearLayout>
@@ -88,7 +88,7 @@
             android:text="@string/lbl_min_temp"
             android:layout_height="wrap_content"
             android:id="@+id/textView18"
-            android:layout_weight="0.5"
+            android:layout_weight=".5"
             android:layout_width="100dp"/>
 
         <TextView
@@ -96,167 +96,183 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMin"
-            android:layout_weight="0.5"
+            android:layout_weight=".5"
             android:textStyle="normal|bold"
             android:textAlignment="textEnd"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearFeels"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:text="@string/lbl_feels_like"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView20"
-            android:layout_weight="0.5"/>
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewFeels"
-            android:layout_weight="0.5"
-            android:textStyle="normal|bold"
-            android:textAlignment="textEnd"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearHumidity"
-        android:layout_below="@+id/linearFeels"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:text="@string/lbl_humidity"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView22"
-            android:layout_weight="0.5"/>
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewHumidity"
-            android:layout_weight="0.5"
-            android:textStyle="normal|bold"
-            android:textAlignment="textEnd"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearDewpoint"
-        android:layout_below="@+id/linearHumidity"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:text="@string/lbl_dewpoint"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView24"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewDewpoint"
-            android:layout_weight="1"
-            android:textStyle="normal|bold"
-            android:textAlignment="textEnd"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearDewpoint"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:layout_above="@+id/linearWinds"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearPressure"
-        android:layout_marginTop="10dp">
+        android:layout_below="@+id/linearMin">
 
-        <TextView
-            android:text="@string/lbl_pressure"
-            android:layout_width="100dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView26"
-            android:layout_weight="1"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewPressure"
-            android:layout_weight="1"
-            android:textStyle="normal|bold"
-            android:textAlignment="textEnd"/>
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearFeels"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearPressure"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearClouds"
-        android:layout_marginTop="10dp">
+                <TextView
+                    android:text="@string/lbl_feels_like"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView20"
+                    android:layout_weight=".5"/>
 
-        <TextView
-            android:text="@string/lbl_clouds"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView28"
-            android:layout_weight="1"/>
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewFeels"
+                    android:layout_weight=".5"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="textEnd"/>
+            </LinearLayout>
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewClouds"
-            android:layout_weight="1"
-            android:textStyle="normal|bold"
-            android:textAlignment="textEnd"/>
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearHumidity"
+                android:layout_below="@+id/linearFeels"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearClouds"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearWinds"
-        android:layout_marginTop="10dp">
+                <TextView
+                    android:text="@string/lbl_humidity"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView22"
+                    android:layout_weight=".5"/>
 
-        <TextView
-            android:text="@string/lbl_winds"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView30"
-            android:layout_weight="1"/>
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewHumidity"
+                    android:layout_weight=".5"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="textEnd"/>
+            </LinearLayout>
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewWinds"
-            android:layout_weight="1"
-            android:textStyle="normal|bold"
-            android:textAlignment="textEnd"/>
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearDewpoint"
+                android:layout_below="@+id/linearHumidity"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:text="@string/lbl_dewpoint"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView24"
+                    android:layout_weight=".5"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewDewpoint"
+                    android:layout_weight=".5"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="textEnd"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearDewpoint"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/linearPressure"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:text="@string/lbl_pressure"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView26"
+                    android:layout_weight=".5"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewPressure"
+                    android:layout_weight=".5"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="textEnd"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearPressure"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/linearClouds"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:text="@string/lbl_clouds"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView28"
+                    android:layout_weight=".5"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewClouds"
+                    android:layout_weight=".5"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="textEnd"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearClouds"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/linearWinds"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:text="@string/lbl_winds"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView30"
+                    android:layout_weight=".5"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewWinds"
+                    android:layout_weight=".5"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="textEnd"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
