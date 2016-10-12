@@ -1,3 +1,8 @@
+/*
+HW5 - Mobile Application Development
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw5;
 
 
@@ -5,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;

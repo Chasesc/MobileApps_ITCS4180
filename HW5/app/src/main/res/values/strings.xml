@@ -27,4 +27,6 @@
     <string name="lbl_updated_on">Updated on:</string>
     <string name="toast_updated_favorites">Updated Favorites Record</string>
     <string name="toast_added_to_favorites">Added to Favorites</string>
+
+    <string name="lbl_api_error">No cities match your search query</string>
 </resources>

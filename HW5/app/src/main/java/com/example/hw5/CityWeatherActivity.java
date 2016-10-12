@@ -1,3 +1,8 @@
+/*
+HW5 - Mobile Application Development
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw5;
 
 import android.app.ProgressDialog;
@@ -115,6 +120,13 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         progressLoading.dismiss();
 
         this.weather = weather;
+
+        if(weather == null || weather.isEmpty())
+        {
+            Toast.makeText(this, getString(R.string.lbl_api_error), Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         Comparator<Weather> comparator = new Comparator<Weather>()
         {

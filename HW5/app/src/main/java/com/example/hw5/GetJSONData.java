@@ -1,6 +1,9 @@
+/*
+HW5 - Mobile Application Development
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw5;
-
-
 
 import android.os.AsyncTask;
 import android.util.Log;

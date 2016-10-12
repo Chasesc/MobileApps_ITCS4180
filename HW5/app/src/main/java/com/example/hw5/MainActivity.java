@@ -1,3 +1,8 @@
+/*
+HW5 - Mobile Application Development
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw5;
 
 import android.content.Intent;
@@ -55,8 +60,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                textViewNoFavorites.setVisibility(View.GONE);
-                listFavorites.setVisibility(View.VISIBLE);
 
                 Intent intent = new Intent(MainActivity.this, CityWeatherActivity.class);
                 intent.putExtra(CITY_KEY,  editCity.getText().toString());
@@ -84,8 +87,8 @@ public class MainActivity extends AppCompatActivity
             Log.d("PIE", "No favorites saved.");
             textViewNoFavorites.setVisibility(View.VISIBLE);
             listFavorites.setVisibility(View.GONE);
-            adapter.clear();
-            adapter.notifyDataSetChanged();
+            //adapter.clear();
+            //adapter.notifyDataSetChanged();
             return;
         }
 
@@ -123,6 +126,22 @@ public class MainActivity extends AppCompatActivity
         textViewNoFavorites = (TextView)findViewById(R.id.textViewNoFav);
 
         updateFavoritesList();
+
+        listFavorites.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                HashMap<String, FavoriteData> favorites = getFavorites();
+                FavoriteData curr = new ArrayList<FavoriteData>(favorites.values()).get(position);
+
+                Intent intent = new Intent(MainActivity.this, CityWeatherActivity.class);
+                intent.putExtra(CITY_KEY,  curr.getCity());
+                intent.putExtra(STATE_KEY, curr.getState());
+
+                startActivity(intent);
+            }
+        });
 
         listFavorites.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
