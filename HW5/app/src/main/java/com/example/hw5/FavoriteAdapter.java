@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 public class FavoriteAdapter extends ArrayAdapter<FavoriteData>
 {
@@ -44,7 +46,11 @@ public class FavoriteAdapter extends ArrayAdapter<FavoriteData>
 
         lblCityState.setText(currFavorite.getCity() + ", " + currFavorite.getState());
         lblTemperature.setText(currFavorite.getTempStored() + "°F");
-        lblUpdatedDate.setText(currFavorite.getDateStored().toString()); // TODO: Format this
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("EST"));
+
+        lblUpdatedDate.setText(convertView.getContext().getString(R.string.lbl_updated_on) +  dateFormat.format(currFavorite.getDateStored()));
 
         return convertView;
     }

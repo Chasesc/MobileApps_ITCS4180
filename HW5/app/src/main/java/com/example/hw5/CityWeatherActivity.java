@@ -95,14 +95,14 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
 
                 if(currFavorites.containsKey(key))
                 {
-                    Toast.makeText(CityWeatherActivity.this, "Updated Favorites Record", Toast.LENGTH_LONG).show(); // TODO: Make string res
+                    Toast.makeText(CityWeatherActivity.this, getString(R.string.toast_updated_favorites), Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Toast.makeText(CityWeatherActivity.this, "Added to Favorites", Toast.LENGTH_LONG).show(); // TODO: Make string res
+                    Toast.makeText(CityWeatherActivity.this, getString(R.string.toast_added_to_favorites), Toast.LENGTH_LONG).show();
                 }
 
-                currFavorites.put(key, new FavoriteData(cityName, stateInitials, Calendar.getInstance().getTime(), weather.get(0).getTemperature()));
+                currFavorites.put(key, new FavoriteData(cityName, stateInitials, Calendar.getInstance().getTime(), weather.get(0).getTemperature())); // Closest temperature to now will always be at pos 0.
 
                 MainActivity.saveFavorites(currFavorites);
             }

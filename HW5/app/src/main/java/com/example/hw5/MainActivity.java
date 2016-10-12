@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onResume() // TODO: I think this is causing a glitch when the submit button is pressed after a favorite is removed, but the list does need to be updated every time the user comes back to this activity.
+    protected void onResume()
     {
         super.onResume();
 
@@ -84,11 +84,13 @@ public class MainActivity extends AppCompatActivity
             Log.d("PIE", "No favorites saved.");
             textViewNoFavorites.setVisibility(View.VISIBLE);
             listFavorites.setVisibility(View.GONE);
+            adapter.clear();
+            adapter.notifyDataSetChanged();
             return;
         }
 
         adapter = new FavoriteAdapter(this, new ArrayList<FavoriteData>(favorites.values()), R.layout.favorite_layout_item);
-        adapter.setNotifyOnChange(true);
+        //adapter.setNotifyOnChange(true); // This is not needed for this implementation.
         listFavorites.setAdapter(adapter);
 
         textViewNoFavorites.setVisibility(View.GONE);
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity
                     favorites.remove(key);
                     saveFavorites(favorites);
                     updateFavoritesList();
-                    Toast.makeText(MainActivity.this, "City Deleted", Toast.LENGTH_LONG).show(); // TODO: Make string res
+                    Toast.makeText(MainActivity.this, getString(R.string.toast_city_deleted), Toast.LENGTH_LONG).show();
                     return true;
                 }
 
