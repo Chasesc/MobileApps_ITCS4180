@@ -24,9 +24,13 @@ import java.util.List;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherViewHolder>
 {
+    public static ClickListener clickListener;
+
     private List<Weather> weather;
     private Context context;
     private int layout;
+
+    public int position;
 
     public WeatherAdapter(Context context, List<Weather> weather, int layout)
     {
@@ -51,6 +55,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherViewHolder>
     {
         Weather currWeather = weather.get(position);
 
+        this.position = holder.getLayoutPosition();
+
         TextView textDate = holder.textDate;
         TextView textTemp = holder.textTemp;
         ImageView icon    = holder.imageIcon;
@@ -69,5 +75,15 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherViewHolder>
     public Context getContext()
     {
         return context;
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener)
+    {
+        WeatherAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener
+    {
+        void onItemClick(int position, View v);
     }
 }

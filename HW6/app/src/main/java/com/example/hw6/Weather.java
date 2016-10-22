@@ -164,6 +164,16 @@ public class Weather implements Serializable
         return formattedDate;
     }
 
+    public String getFormattedHour()
+    {
+        int intHour = Integer.parseInt(hour);
+
+        int realHour = intHour == 0 || intHour == 12 ? 12 : intHour % 12;
+
+        return realHour + ":00 " + ((intHour >= 12) ? "PM" : "AM");
+
+    }
+
     @Override
     public String toString()
     {

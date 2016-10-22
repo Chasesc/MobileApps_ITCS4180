@@ -14,13 +14,14 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 
 public class WeatherUtil
 {
     public static final String WEATHER_UTIL_DEBUG = "WeatherUtil";
 
-    public static ArrayList<Weather> getDailyWeatherFromHourly(ArrayList<Weather> hourlyWeather)
+    public static ArrayList<Weather> getDailyWeatherSummary(ArrayList<Weather> hourlyWeather)
     {
         ArrayList<Weather> dailyWeather = new ArrayList<>();
 
@@ -61,6 +62,33 @@ public class WeatherUtil
         dailyWeather.add(currDayWeather);
 
         return dailyWeather;
+    }
+
+    public static HashMap<Date, ArrayList<Weather>> getDailyWeatherFromHourly(ArrayList<Weather> hourlyWeather)
+    {
+        HashMap<Date, ArrayList<Weather>> dateToWeather = new HashMap<>();
+        ArrayList<Weather> dailyWeather = new ArrayList<>();
+
+        Date lastDate = hourlyWeather.get(0).getRealDate();
+
+        for(Weather currWeater : hourlyWeather)
+        {
+            Date currDate = currWeater.getRealDate();
+
+            if(!currDate.equals(lastDate))
+            {
+                dateToWeather.put(lastDate, dailyWeather);
+                dailyWeather = new ArrayList<>();
+            }
+
+            dailyWeather.add(currWeater);
+
+            lastDate = currDate;
+        }
+
+        dateToWeather.put(lastDate, dailyWeather);
+
+        return dateToWeather;
     }
 
     public static class JSONParser

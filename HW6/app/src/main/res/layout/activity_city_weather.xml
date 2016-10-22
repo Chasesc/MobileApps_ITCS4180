@@ -33,14 +33,13 @@
         android:id="@+id/recyclerBasicWeather"/>
 
     <TextView
-        android:text="Three Hourly Forecast on Oct 06, 2016"
+        android:text="@string/lbl_three_hour_forecast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recyclerBasicWeather"
         android:layout_centerHorizontal="true"
         android:id="@+id/textViewForecast"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textAlignment="viewStart"
         android:textStyle="normal|bold"
         android:textColor="@android:color/background_dark"/>
 

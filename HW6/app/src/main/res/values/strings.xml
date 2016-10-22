@@ -14,4 +14,10 @@
     <string name="lbl_no_saved_cities">There are no cities to display.  Search the city from the search box and save.</string>
 
     <string name="lbl_api_error">No cities match your search query</string>
+
+    <string name="lbl_temp">Temperature:</string>
+    <string name="lbl_condition">Condition:</string>
+    <string name="lbl_pressure">Pressure:</string>
+    <string name="lbl_humidity">Humidity</string>
+    <string name="lbl_wind">Wind:</string>
 </resources>

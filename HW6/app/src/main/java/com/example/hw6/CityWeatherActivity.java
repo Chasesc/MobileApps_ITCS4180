@@ -7,16 +7,22 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class CityWeatherActivity extends AppCompatActivity implements GetJSONData.IJSONActivity
 {
     private static final String CITY_DEBUG_TAG = "CityWeatherActivity";
     private static final String API_KEY = "a37a50b9efa023214652951dfd2bcee1";
 
-    private WeatherAdapter adapter;
+    private WeatherAdapter adapterBasic;
+    private WeatherAdapterDetailed adapterDetailed;
 
     private RecyclerView rvBasicWeather, rvDetailedWeather;
     private ProgressDialog progressLoading;
@@ -24,7 +30,8 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
 
 
     private String cityName, countryInitials;
-    private ArrayList<Weather> weather, dailyWeather;
+    private ArrayList<Weather> weather, dailyWeatherSummary;
+    private HashMap<Date, ArrayList<Weather>> dateToWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -82,13 +89,64 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         this.weather = weather;
         progressLoading.dismiss();
 
-        dailyWeather = WeatherUtil.getDailyWeatherFromHourly(weather);
+        dailyWeatherSummary = WeatherUtil.getDailyWeatherSummary(weather);
+        dateToWeather = WeatherUtil.getDailyWeatherFromHourly(weather);
 
-        Log.d(CITY_DEBUG_TAG, dailyWeather.size() + " " + weather.size());
+        final ArrayList<Weather> dayWeatherItems = dateToWeather.get(getTodayWithoutTime());
 
-        adapter = new WeatherAdapter(this, dailyWeather, R.layout.basic_weather_item);
-        rvBasicWeather.setAdapter(adapter);
+        for(Date day : dateToWeather.keySet())
+        {
+            Log.d(CITY_DEBUG_TAG, "weather on day " + day + "\n" + dateToWeather.get(day));
+        }
+
+        //Log.d(CITY_DEBUG_TAG, dailyWeatherSummary.size() + " " + weather.size());
+
+        adapterBasic = new WeatherAdapter(this, dailyWeatherSummary, R.layout.basic_weather_item);
+
+        adapterBasic.setOnItemClickListener(new WeatherAdapter.ClickListener()
+        {
+            @Override
+            public void onItemClick(int position, View v)
+            {
+                Date selectedDate = dailyWeatherSummary.get(position).getRealDate();
+                Log.d(CITY_DEBUG_TAG, "onItemClickpos " + dateToWeather.get(selectedDate) + "\ndats day: " + selectedDate);
+                dayWeatherItems.clear();
+                dayWeatherItems.addAll(dateToWeather.get(selectedDate));
+                adapterDetailed.notifyDataSetChanged();
+                rvDetailedWeather.scrollToPosition(0);
+
+                setThreeHourlyForecastText(selectedDate);
+            }
+        });
+
+        rvBasicWeather.setAdapter(adapterBasic);
         rvBasicWeather.setHasFixedSize(true);
         rvBasicWeather.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        Log.d(CITY_DEBUG_TAG, "test\n" + dateToWeather.get(getTodayWithoutTime()));
+
+        adapterDetailed = new WeatherAdapterDetailed(this, dayWeatherItems, R.layout.detailed_weather_item);
+        rvDetailedWeather.setAdapter(adapterDetailed);
+        rvDetailedWeather.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        setThreeHourlyForecastText(new Date());
+    }
+
+    private void setThreeHourlyForecastText(Date date)
+    {
+        String formattedDate = new SimpleDateFormat("MMM dd, yyyy").format(date);
+        textForecast.setText(getString(R.string.lbl_three_hour_forecast) + " " + formattedDate);
+    }
+
+    private Date getTodayWithoutTime()
+    {
+        SimpleDateFormat sdf =  new SimpleDateFormat("dd/MM/yyyy");
+
+        try
+        {
+            return sdf.parse(sdf.format(new Date()));
+        } catch (ParseException e)
+        {
+            return null;
+        }
     }
 }
