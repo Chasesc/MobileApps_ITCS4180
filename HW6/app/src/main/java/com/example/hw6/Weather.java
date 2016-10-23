@@ -125,7 +125,7 @@ public class Weather implements Serializable
 
     public String getWindDir()
     {
-        return windDir;
+        return windDir + "°";
     }
 
     public void setWindDir(String windDir)

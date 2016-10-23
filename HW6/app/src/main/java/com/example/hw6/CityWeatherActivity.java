@@ -89,10 +89,18 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         this.weather = weather;
         progressLoading.dismiss();
 
+        if(weather == null)
+        {
+            Log.d(CITY_DEBUG_TAG, "weather was null :(");
+            return;
+        }
+
         dailyWeatherSummary = WeatherUtil.getDailyWeatherSummary(weather);
         dateToWeather = WeatherUtil.getDailyWeatherFromHourly(weather);
 
-        final ArrayList<Weather> dayWeatherItems = dateToWeather.get(getTodayWithoutTime());
+        final Date earliestDateFromAPI = getEarliestDate(dateToWeather);
+
+        final ArrayList<Weather> dayWeatherItems = dateToWeather.get(earliestDateFromAPI);
 
         for(Date day : dateToWeather.keySet())
         {
@@ -123,12 +131,12 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         rvBasicWeather.setHasFixedSize(true);
         rvBasicWeather.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        Log.d(CITY_DEBUG_TAG, "test\n" + dateToWeather.get(getTodayWithoutTime()));
+        Log.d(CITY_DEBUG_TAG, "test\n" + dateToWeather.get(earliestDateFromAPI));
 
         adapterDetailed = new WeatherAdapterDetailed(this, dayWeatherItems, R.layout.detailed_weather_item);
         rvDetailedWeather.setAdapter(adapterDetailed);
         rvDetailedWeather.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        setThreeHourlyForecastText(new Date());
+        setThreeHourlyForecastText(earliestDateFromAPI);
     }
 
     private void setThreeHourlyForecastText(Date date)
@@ -137,16 +145,17 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         textForecast.setText(getString(R.string.lbl_three_hour_forecast) + " " + formattedDate);
     }
 
-    private Date getTodayWithoutTime()
+    private Date getEarliestDate(HashMap<Date, ArrayList<Weather>> dateToWeather)
     {
-        SimpleDateFormat sdf =  new SimpleDateFormat("dd/MM/yyyy");
-
-        try
+        Date earliest = null;
+        for(Date date : dateToWeather.keySet())
         {
-            return sdf.parse(sdf.format(new Date()));
-        } catch (ParseException e)
-        {
-            return null;
+            if(earliest == null)
+                earliest = date;
+            else if(earliest.compareTo(date) > 0)
+                earliest = date;
         }
+
+        return earliest;
     }
 }

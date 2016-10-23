@@ -5,10 +5,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by Computer on 10/22/2016.
- */
-
 public class SavedCityViewHolder extends RecyclerView.ViewHolder
 {
     public TextView textLocation, textTemp, textUpdatedOn;
