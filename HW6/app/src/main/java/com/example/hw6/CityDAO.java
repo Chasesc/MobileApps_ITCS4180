@@ -46,10 +46,12 @@ public class CityDAO
     {
         ArrayList<City> cities = new ArrayList<>();
 
+
+
         Cursor c = db.query(CitiesTable.TABLE_NAME,
                 new String[] {CitiesTable.ID, CitiesTable.CITY_NAME, CitiesTable.COUNTRY,
                 CitiesTable.TEMPERATURE, CitiesTable.FAVORITE},
-                null, null, null, null, CitiesTable.FAVORITE);
+                null, null, null, null, CitiesTable.FAVORITE + " DESC");
 
         if(c != null && c.getCount() > 0)
         {

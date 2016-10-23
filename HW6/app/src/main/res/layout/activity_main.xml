@@ -73,5 +73,15 @@
         android:layout_marginEnd="11dp"
         android:layout_marginTop="34dp"
         android:visibility="gone"
-        android:id="@+id/recyclerSavedCities"/>
+        android:id="@+id/recyclerSavedCities"
+        android:layout_above="@+id/buttonSettings"/>
+
+    <Button
+        android:text="@string/lbl_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSettings"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="false"/>
 </RelativeLayout>

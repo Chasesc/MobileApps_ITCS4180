@@ -50,6 +50,27 @@
         android:layout_below="@+id/recyclerBasicWeather"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/recyclerDetailedWeather"/>
+        android:id="@+id/recyclerDetailedWeather"
+        android:layout_above="@+id/buttonSave"/>
+
+    <Button
+        android:text="@string/lbl_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSave"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:text="@string/lbl_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSettings"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAllCaps="false"/>
 
 </RelativeLayout>

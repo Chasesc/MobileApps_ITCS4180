@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -27,11 +28,13 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
     private RecyclerView rvBasicWeather, rvDetailedWeather;
     private ProgressDialog progressLoading;
     private TextView textDailyForecast, textForecast;
-
+    private Button buttonSave, buttonSettings;
 
     private String cityName, countryInitials;
     private ArrayList<Weather> weather, dailyWeatherSummary;
     private HashMap<Date, ArrayList<Weather>> dateToWeather;
+
+    private Date earliestDateFromAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +43,7 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         setContentView(R.layout.activity_city_weather);
 
         setAllViews();
+        setButtonOnClickListeners();
 
         Intent intent = getIntent();
         if(intent == null)
@@ -81,6 +85,37 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
 
         rvBasicWeather    = (RecyclerView) findViewById(R.id.recyclerBasicWeather);
         rvDetailedWeather = (RecyclerView) findViewById(R.id.recyclerDetailedWeather);
+
+        buttonSave     = (Button) findViewById(R.id.buttonSave);
+        buttonSettings = (Button) findViewById(R.id.buttonSettings);
+    }
+
+    private void setButtonOnClickListeners()
+    {
+        buttonSave.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                City city = new City();
+                city.setName(cityName);
+                city.setCountry(countryInitials);
+                city.setTemperature((float) dailyWeatherSummary.get(0).getTemp());
+                city.setFavorite(0);
+
+                if(cityAlreadySaved(city))
+                    MainActivity.dm.updateCity(city);
+                else
+                    MainActivity.dm.saveCity(city);
+
+                finish();
+            }
+        });
+    }
+
+    private boolean cityAlreadySaved(City city)
+    {
+        return MainActivity.cities.contains(city);
     }
 
     @Override
@@ -98,7 +133,7 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         dailyWeatherSummary = WeatherUtil.getDailyWeatherSummary(weather);
         dateToWeather = WeatherUtil.getDailyWeatherFromHourly(weather);
 
-        final Date earliestDateFromAPI = getEarliestDate(dateToWeather);
+        earliestDateFromAPI = getEarliestDate(dateToWeather);
 
         final ArrayList<Weather> dayWeatherItems = dateToWeather.get(earliestDateFromAPI);
 

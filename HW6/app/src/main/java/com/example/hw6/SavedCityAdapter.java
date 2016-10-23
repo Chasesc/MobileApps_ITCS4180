@@ -2,6 +2,7 @@ package com.example.hw6;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import java.util.List;
 
 public class SavedCityAdapter extends RecyclerView.Adapter<SavedCityViewHolder>
 {
+    public static IClickListener clickListener;
+
     private List<City> cities;
     private Context context;
     private int layout;
@@ -43,14 +46,27 @@ public class SavedCityAdapter extends RecyclerView.Adapter<SavedCityViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(SavedCityViewHolder holder, int position)
+    public void onBindViewHolder(SavedCityViewHolder holder, final int position)
     {
-        City currCity = cities.get(position);
+        final City currCity = cities.get(position);
 
         TextView textLocation = holder.textLocation;
         TextView textTemp = holder.textTemp;
         TextView textUpdatedOn = holder.textUpdatedOn;
         ImageView ivFavIcon = holder.ivFavIcon;
+
+        ivFavIcon.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                MainActivity.cities.remove(position);
+                currCity.setFavorite(currCity.isFavorite()? 0 : 1);
+                MainActivity.cities.add(0, currCity);
+                notifyDataSetChanged();
+                MainActivity.dm.updateCity(currCity);
+            }
+        });
 
         // TODO: probably change?
         String updatedOn = new SimpleDateFormat("MMM dd, yyyy").format(new Date());
@@ -63,9 +79,20 @@ public class SavedCityAdapter extends RecyclerView.Adapter<SavedCityViewHolder>
         Picasso.with(context).load(image).into(ivFavIcon);
     }
 
+    public void setOnItemClickListener(IClickListener clickListener)
+    {
+        SavedCityAdapter.clickListener = clickListener;
+    }
+
     @Override
     public int getItemCount()
     {
         return cities.size();
+    }
+
+    public interface IClickListener
+    {
+        void onItemClick(int position, View v);
+        void onItemLongClick(int position, View v);
     }
 }

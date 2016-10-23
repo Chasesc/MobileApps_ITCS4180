@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity
     private EditText editCity, editState;
     private Button   buttonSubmit;
 
-    private DataManager dm;
+    public static DataManager dm;
 
-    private ArrayList<City> cities;
+    public static ArrayList<City> cities;
 
     private RecyclerView rvSavedCities;
     private SavedCityAdapter cityAdapter;
@@ -61,6 +61,31 @@ public class MainActivity extends AppCompatActivity
     {
         showRecyclerView(!cities.isEmpty());
         cityAdapter = new SavedCityAdapter(this, cities, R.layout.saved_city_item);
+
+        cityAdapter.setOnItemClickListener(new SavedCityAdapter.IClickListener()
+        {
+            @Override
+            public void onItemClick(int position, View v)
+            {
+                Log.d(TAG, "onItemClick: " + position);
+
+                City city = cities.get(position);
+                Intent intent = new Intent(MainActivity.this, CityWeatherActivity.class);
+                intent.putExtra(CITY_KEY,  city.getName());
+                intent.putExtra(COUNTRY_KEY, city.getCountry());
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v)
+            {
+                Log.d(TAG, "onItemLongClick: " + position);
+                dm.deleteCity(cities.remove(position));
+                updateCities();
+            }
+        });
+
         rvSavedCities.setAdapter(cityAdapter);
         rvSavedCities.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -89,5 +114,22 @@ public class MainActivity extends AppCompatActivity
             textViewNothingSaved.setVisibility(View.VISIBLE);
             rvSavedCities.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        updateCities();
+    }
+
+    private void updateCities()
+    {
+        cities.clear();
+        cities.addAll(dm.getAllCities());
+        cityAdapter.notifyDataSetChanged();
+        rvSavedCities.scrollToPosition(0);
+        showRecyclerView(!cities.isEmpty());
     }
 }

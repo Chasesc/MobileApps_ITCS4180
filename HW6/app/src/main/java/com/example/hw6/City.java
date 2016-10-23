@@ -72,6 +72,20 @@ public class City
     }
 
     @Override
+    public boolean equals(Object other)
+    {
+        if(other instanceof City)
+            return equals((City)other);
+
+        return false;
+    }
+
+    public boolean equals(City other)
+    {
+        return name.equals(other.name) && country.equals(other.country);
+    }
+
+    @Override
     public String toString()
     {
         return "City{" +
