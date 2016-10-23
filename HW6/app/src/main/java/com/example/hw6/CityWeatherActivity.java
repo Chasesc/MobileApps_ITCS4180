@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,8 +60,8 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         progressLoading.show();
 
         Log.d(CITY_DEBUG_TAG, getJSONURI());
-        new GetJSONData(this).execute("http://api.openweathermap.org/data/2.5/forecast?q=Charlotte,US&APPID=a37a50b9efa023214652951dfd2bcee1");
-        //new GetJSONData(this).execute(getJSONURI());
+        //new GetJSONData(this).execute("http://api.openweathermap.org/data/2.5/forecast?q=Charlotte,US&APPID=a37a50b9efa023214652951dfd2bcee1");
+        new GetJSONData(this).execute(getJSONURI());
     }
 
     private String getJSONURI()
@@ -127,7 +128,8 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         if(weather == null)
         {
             Log.d(CITY_DEBUG_TAG, "weather was null :(");
-            return;
+            Toast.makeText(this, getString(R.string.lbl_api_error), Toast.LENGTH_SHORT).show();
+            finish();
         }
 
         dailyWeatherSummary = WeatherUtil.getDailyWeatherSummary(weather);
