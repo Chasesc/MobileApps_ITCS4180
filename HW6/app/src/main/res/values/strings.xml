@@ -20,4 +20,6 @@
     <string name="lbl_pressure">Pressure:</string>
     <string name="lbl_humidity">Humidity</string>
     <string name="lbl_wind">Wind:</string>
+
+    <string name="lbl_updated_on">Updated on:</string>
 </resources>
