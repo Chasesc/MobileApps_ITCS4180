@@ -1,3 +1,8 @@
+/*
+HW6
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw6;
 
 public class City
@@ -83,6 +88,20 @@ public class City
     public boolean equals(City other)
     {
         return name.equals(other.name) && country.equals(other.country);
+    }
+
+    public String getTempFahrenheit()
+    {
+        double fahrenheit = 1.8 * (temperature - 273.15) + 32; // Kelvin -> Fahrenheit
+
+        return String.format( "%.2f", fahrenheit) + "° F";
+    }
+
+    public String getTempCelsius()
+    {
+        double celsius = temperature - 273.15; // Kelvin -> Celsius
+
+        return String.format( "%.2f", celsius) + "° C";
     }
 
     @Override

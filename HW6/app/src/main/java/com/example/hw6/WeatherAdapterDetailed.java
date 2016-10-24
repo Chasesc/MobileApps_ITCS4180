@@ -1,3 +1,8 @@
+/*
+HW6
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw6;
 
 import android.content.Context;
@@ -50,8 +55,11 @@ public class WeatherAdapterDetailed extends RecyclerView.Adapter<WeatherDetailed
         TextView textWind = holder.textWind;
         ImageView weatherIcon = holder.weatherIcon;
 
+        String temp = PreferenceActivity.isFahrenheit? currWeather.getTempFahrenheit() :
+                currWeather.getTempCelsius();
+
         textHour.setText(currWeather.getFormattedHour());
-        textTemp.setText(currWeather.getTempFahrenheit());
+        textTemp.setText(temp);
         textCondtition.setText(currWeather.getCondition());
         textHumidity.setText(currWeather.getHumidity() + "%");
         textPressure.setText(currWeather.getPressure() + " hPa");

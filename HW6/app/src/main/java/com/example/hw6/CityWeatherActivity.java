@@ -1,3 +1,8 @@
+/*
+HW6
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw6;
 
 import android.app.ProgressDialog;
@@ -18,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class CityWeatherActivity extends AppCompatActivity implements GetJSONData.IJSONActivity
+public class CityWeatherActivity extends AppCompatActivity implements GetJSONData.IJSONActivity, PreferenceActivity.INeedsUpdateFromSettings
 {
     private static final String CITY_DEBUG_TAG = "CityWeatherActivity";
     private static final String API_KEY = "a37a50b9efa023214652951dfd2bcee1";
@@ -112,6 +117,17 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
                 finish();
             }
         });
+
+        buttonSettings.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(CityWeatherActivity.this, PreferenceActivity.class);
+                PreferenceActivity.activity = CityWeatherActivity.this;
+                startActivity(intent);
+            }
+        });
     }
 
     private boolean cityAlreadySaved(City city)
@@ -125,11 +141,12 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         this.weather = weather;
         progressLoading.dismiss();
 
-        if(weather == null)
+        if(weather == null || weather.isEmpty())
         {
             Log.d(CITY_DEBUG_TAG, "weather was null :(");
             Toast.makeText(this, getString(R.string.lbl_api_error), Toast.LENGTH_SHORT).show();
             finish();
+            return;
         }
 
         dailyWeatherSummary = WeatherUtil.getDailyWeatherSummary(weather);
@@ -194,5 +211,12 @@ public class CityWeatherActivity extends AppCompatActivity implements GetJSONDat
         }
 
         return earliest;
+    }
+
+    @Override
+    public void updateAfterSettingsChange()
+    {
+        adapterBasic.notifyDataSetChanged();
+        adapterDetailed.notifyDataSetChanged();
     }
 }

@@ -1,3 +1,8 @@
+/*
+HW6
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw6;
 
 import android.app.Activity;
@@ -61,8 +66,11 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherViewHolder>
         TextView textTemp = holder.textTemp;
         ImageView icon    = holder.imageIcon;
 
+        String temp = PreferenceActivity.isFahrenheit? currWeather.getTempFahrenheit() :
+                currWeather.getTempCelsius();
+
         textDate.setText(currWeather.getFormattedDate());
-        textTemp.setText(currWeather.getTempFahrenheit());
+        textTemp.setText(temp);
         Picasso.with(context).load(currWeather.getIconURI()).into(icon);
     }
 

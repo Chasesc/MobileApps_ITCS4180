@@ -1,3 +1,8 @@
+/*
+HW6
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw6;
 
 import android.database.SQLException;

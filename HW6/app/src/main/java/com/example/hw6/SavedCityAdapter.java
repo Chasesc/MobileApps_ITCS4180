@@ -1,3 +1,8 @@
+/*
+HW6
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw6;
 
 import android.content.Context;
@@ -70,9 +75,11 @@ public class SavedCityAdapter extends RecyclerView.Adapter<SavedCityViewHolder>
 
         // TODO: probably change?
         String updatedOn = new SimpleDateFormat("MMM dd, yyyy").format(new Date());
+        String temp = PreferenceActivity.isFahrenheit? currCity.getTempFahrenheit() :
+                currCity.getTempCelsius();
 
         textLocation.setText(currCity.getName() + ", " + currCity.getCountry());
-        textTemp.setText(currCity.getTemperature() + "");
+        textTemp.setText(temp);
         textUpdatedOn.setText(context.getString(R.string.lbl_updated_on) + " " + updatedOn);
 
         int image = currCity.isFavorite()? R.drawable.star_gold : R.drawable.star_gray;

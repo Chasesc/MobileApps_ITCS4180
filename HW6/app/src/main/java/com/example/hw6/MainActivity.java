@@ -1,3 +1,8 @@
+/*
+HW6
+Chase Schelthoff and Phillip Hunter
+ */
+
 package com.example.hw6;
 
 import android.content.Intent;
@@ -22,7 +27,7 @@ public class MainActivity extends AppCompatActivity
 
     private TextView textViewNothingSaved;
     private EditText editCity, editState;
-    private Button   buttonSubmit;
+    private Button   buttonSubmit, buttonSettings;
 
     public static DataManager dm;
 
@@ -40,6 +45,8 @@ public class MainActivity extends AppCompatActivity
         setAllViews();
         setRecyclerView();
 
+        PreferenceActivity.initSettings(this);
+
         buttonSubmit.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -50,6 +57,16 @@ public class MainActivity extends AppCompatActivity
                 intent.putExtra(CITY_KEY,  editCity.getText().toString());
                 intent.putExtra(COUNTRY_KEY, editState.getText().toString());
 
+                startActivity(intent);
+            }
+        });
+
+        buttonSettings.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, PreferenceActivity.class);
                 startActivity(intent);
             }
         });
@@ -94,8 +111,9 @@ public class MainActivity extends AppCompatActivity
     {
         editCity             = (EditText) findViewById(R.id.editTextCity);
         editState            = (EditText) findViewById(R.id.editTextState);
-        buttonSubmit         = (Button) findViewById(R.id.buttonSubmit);
-        textViewNothingSaved = (TextView)findViewById(R.id.textViewNoFav);
+        buttonSubmit         = (Button)   findViewById(R.id.buttonSubmit);
+        buttonSettings       = (Button)   findViewById(R.id.buttonSettings);
+        textViewNothingSaved = (TextView)     findViewById(R.id.textViewNoFav);
         rvSavedCities        = (RecyclerView) findViewById(R.id.recyclerSavedCities);
 
         dm = new DataManager(MainActivity.this);
