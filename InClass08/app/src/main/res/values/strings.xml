@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Expense App</string>
+    <string name="app_name_add">Add Expense</string>
+    <string name="app_name_show">Show Expense</string>
+    <string name="no_expenses">There is no expense to show, Please add your expenses from the menu.</string>
+    <string name="lbl_current_expenses">Current Expenses</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="lbl_add_expense">Add an Expense</string>
+    <string name="lbl_expense_name">Expense Name</string>
+    <string name="lbl_expense_category">Category</string>
+    <string name="lbl_amount">Amount</string>
+
+    <string name="lbl_add_button">Add Expense</string>
+    <string name="lbl_cancel_button">Cancel</string>
+    <string name="lbl_deleted">Expense Deleted</string>
+    <string name="lbl_invalid_expense">Atleast one field is invalid</string>
+
+    <string name="category_groceries">Groceries</string>
+    <string name="category_invoice">Invoice</string>
+    <string name="category_transportation">Transportation</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_rent">Rent</string>
+    <string name="category_trips">Trips</string>
+    <string name="category_utilities">Utilities</string>
+    <string name="category_other">Other</string>
+
+    <string-array name="array_categories">
+        <item>@string/category_groceries</item>
+        <item>@string/category_invoice</item>
+        <item>@string/category_transportation</item>
+        <item>@string/category_shopping</item>
+        <item>@string/category_rent</item>
+        <item>@string/category_trips</item>
+        <item>@string/category_utilities</item>
+        <item>@string/category_other</item>
+    </string-array>
+
+    <string name="lbl_show_expense">Expense Details</string>
+    <string name="lbl_name">Name</string>
+    <string name="lbl_category">Category</string>
+    <string name="lbl_date">Date</string>
+    <string name="lbl_button_close">Close</string>
+</resources>

@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.inclass08.ExpenseFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/lbl_current_expenses"
+        android:id="@+id/textViewCurrentExpenses"
+        android:layout_gravity="left|top"
+        android:layout_margin="10dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="463dp"
+        android:id="@+id/listViewExpenses"
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/imageViewAddExpense"
+        android:layout_gravity="right|top"
+        android:layout_margin="10dp"
+        android:src="@drawable/add_icon" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/no_expenses"
+        android:id="@+id/textViewNoExpenses"
+        android:layout_gravity="center" />
+</FrameLayout>
