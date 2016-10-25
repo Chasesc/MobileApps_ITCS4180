@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_width="155dp">
+
+    <ImageView
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="14dp"
+        android:id="@+id/imageViewSavedIcon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewSavedName"
+        android:layout_below="@+id/imageViewSavedIcon"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewSavedName"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textViewSavedPrice"/>
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/imageViewSavedPrice"
+        android:layout_below="@+id/textViewSavedPrice"
+        android:layout_alignLeft="@+id/textViewSavedPrice"
+        android:layout_alignStart="@+id/textViewSavedPrice"/>
+
+    <ImageView
+        app:srcCompat="@drawable/delete_icon"
+        android:id="@+id/imageViewSavedDeleteIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/textViewSavedPrice"
+        android:layout_toRightOf="@+id/imageViewSavedIcon"
+        android:layout_toEndOf="@+id/imageViewSavedIcon"/>
+</RelativeLayout>

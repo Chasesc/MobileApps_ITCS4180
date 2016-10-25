@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">iTunes Top Paid Apps</string>
+    <string name="lbl_ascending">Ascending</string>
+    <string name="lbl_descending">Descending</string>
+    <string name="lbl_filtered_apps">Filtered Apps:</string>
+    <string name="lbl_no_filtered">There is no filtered app to display.</string>
+
+    <string name="lbl_price">Price:</string>
+    <string name="lbl_loading">Loading...</string>
+</resources>
